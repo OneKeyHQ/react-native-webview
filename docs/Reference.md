@@ -1543,6 +1543,10 @@ Example:
 
 An array of custom menu item objects that will be appended to the UIMenu that appears when selecting text (will appear after 'Copy' and 'Share...').  Used in tandem with `onCustomMenuSelection`
 
+| Type                                                               | Required | Platform |
+| ------------------------------------------------------------------ | -------- | -------- |
+| array of objects: {label: string, key: string}                     | No       | iOS      |
+
 Example:
 
 ```javascript
@@ -1552,6 +1556,10 @@ Example:
 ### `onCustomMenuSelection`
 
 Function called when a custom menu item is selected.  It receives a Native event, which includes three custom keys: `label`, `key` and `selectedText`.
+
+| Type                                                               | Required | Platform |
+| ------------------------------------------------------------------ | -------- | -------- |
+| function                                                           | No       | iOS      |
 
 ```javascript
 <WebView 
