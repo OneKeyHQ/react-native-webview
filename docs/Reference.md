@@ -1627,6 +1627,20 @@ This is the message that is shown in the Toast when the webview is unable to dow
 | ------ | -------- | -------- |
 | string | No       | Android  |
 
+### `fraudulentWebsiteWarningEnabled`
+
+A Boolean value that indicates whether the web view shows warnings for suspected fraudulent content, such as malware or phishing attemps. The default value `false`. (iOS 13+)
+
+| Type    | Required | Default | Platform |
+| ------- | -------- | ------- | -------- |
+| boolean | No       | true    | iOS      |
+
+Example:
+
+```javascript
+<WebView fraudulentWebsiteWarningEnabled={true} />
+```
+
 ## Methods
 
 ### `goForward()`[⬆](#methods-index)<!-- Link generated with jump2header -->

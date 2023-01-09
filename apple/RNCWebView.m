@@ -336,6 +336,10 @@ RCTAutoInsetsProtocol>
     prefs.javaScriptEnabled = NO;
     _prefsUsed = YES;
   }
+  if (!_fraudulentWebsiteWarningEnabled) {
+    prefs.fraudulentWebsiteWarningEnabled = NO;
+    _prefsUsed = YES;
+  }
   if (_allowUniversalAccessFromFileURLs) {
     [wkWebViewConfig setValue:@TRUE forKey:@"allowUniversalAccessFromFileURLs"];
   }
