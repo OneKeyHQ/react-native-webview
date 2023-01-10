@@ -395,6 +395,7 @@ export interface IOSNativeWebViewProps extends CommonNativeWebViewProps {
   limitsNavigationsToAppBoundDomains?: boolean;
   textInteractionEnabled?: boolean;
   mediaCapturePermissionGrantType?: MediaCapturePermissionGrantType;
+  fraudulentWebsiteWarningEnabled?: boolean;
 }
 
 export interface MacOSNativeWebViewProps extends CommonNativeWebViewProps {
