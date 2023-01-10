@@ -1629,7 +1629,7 @@ This is the message that is shown in the Toast when the webview is unable to dow
 
 ### `fraudulentWebsiteWarningEnabled`
 
-A Boolean value that indicates whether the web view shows warnings for suspected fraudulent content, such as malware or phishing attemps. The default value `false`. (iOS 13+)
+A Boolean value that indicates whether the web view shows warnings for suspected fraudulent content, such as malware or phishing attemps. The default value is `true`. (iOS 13+)
 
 | Type    | Required | Default | Platform |
 | ------- | -------- | ------- | -------- |
