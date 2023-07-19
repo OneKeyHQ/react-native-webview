@@ -2,6 +2,7 @@ import escapeStringRegexp from 'escape-string-regexp';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { Linking, View, ActivityIndicator, Text, Platform } from 'react-native';
 import {
+  ERROR_CODE,
   OnShouldStartLoadWithRequest,
   ShouldStartLoadRequestEvent,
   WebViewError,
@@ -198,7 +199,22 @@ export const useWebWiewLogic = ({
     const { nativeEvent: { progress } } = event;
     // patch for Android only
     if (Platform.OS === "android" && progress === 1) {
-      setViewState(prevViewState => prevViewState === 'LOADING' ? 'IDLE' : prevViewState);
+      // redirection between different domains may cause failure on Android
+      if (event.nativeEvent.url === null) {
+        setViewState('ERROR');
+        setLastErrorEvent({
+          url: event.nativeEvent.url,
+          loading: event.nativeEvent.loading,
+          title: event.nativeEvent.title,
+          canGoBack: event.nativeEvent.canGoBack,
+          canGoForward: event.nativeEvent.canGoForward,
+          lockIdentifier: event.nativeEvent.lockIdentifier,
+          code: ERROR_CODE.CONNECTION_FAILED,
+          description: 'connection failed',
+        });
+      } else {
+        setViewState(prevViewState => prevViewState === 'LOADING' ? 'IDLE' : prevViewState);
+      }
     }
     // !patch for Android only
     onLoadProgress?.(event);

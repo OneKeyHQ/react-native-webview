@@ -1331,3 +1331,7 @@ export interface WebViewSharedProps extends ViewProps {
    */
   basicAuthCredential?: BasicAuthCredential;
 }
+
+export enum ERROR_CODE {
+  CONNECTION_FAILED = -1001000,
+}
