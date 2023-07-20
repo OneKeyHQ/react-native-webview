@@ -2,7 +2,6 @@ import escapeStringRegexp from 'escape-string-regexp';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { Linking, View, ActivityIndicator, Text, Platform } from 'react-native';
 import {
-  ERROR_CODE,
   OnShouldStartLoadWithRequest,
   ShouldStartLoadRequestEvent,
   WebViewError,
@@ -17,6 +16,10 @@ import {
   WebViewTerminatedEvent,
 } from './WebViewTypes';
 import styles from './WebView.styles';
+
+const ERROR_CODE = {
+  CONNECTION_FAILED: -1001000,
+}
 
 const defaultOriginWhitelist = ['http://*', 'https://*'] as const;
 
