@@ -224,9 +224,9 @@ RCT_EXPORT_METHOD(shouldStartLoadWithLockIdentifier:(BOOL)shouldStart
 
 RCT_EXPORT_METHOD(loadUrl:(nonnull NSNumber *)reactTag url:(NSString *)url)
 {
-  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RNCWebView *> *viewRegistry) {
-    RNCWebView *view = viewRegistry[reactTag];
-    if (![view isKindOfClass:[RNCWebView class]]) {
+  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, BASE_VIEW_PER_OS() *> *viewRegistry) {
+    RNCWebViewImpl *view = (RNCWebViewImpl *)viewRegistry[reactTag];
+    if (![view isKindOfClass:[RNCWebViewImpl class]]) {
       RCTLogError(@"Invalid view returned from registry, expecting RNCWebView, got: %@", view);
     } else {
       NSDictionary *source = [NSDictionary dictionaryWithObjectsAndKeys:url,@"uri",nil];
