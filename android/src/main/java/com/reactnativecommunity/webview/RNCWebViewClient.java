@@ -40,6 +40,12 @@ public class RNCWebViewClient extends WebViewClient {
 
     protected boolean mLastLoadFailed = false;
     protected RNCWebView.ProgressChangedFilter progressChangedFilter = null;
+
+    public static interface OnLoadingFinishedListener {
+        void onLoadingFinished();
+    }
+    public OnLoadingFinishedListener loadingFinishedListener = null;
+    
     protected @Nullable String ignoreErrFailedForThisURL = null;
     protected @Nullable RNCBasicAuthCredential basicAuthCredential = null;
 
@@ -297,6 +303,9 @@ public class RNCWebViewClient extends WebViewClient {
     protected void emitFinishEvent(WebView webView, String url) {
         int reactTag = RNCWebViewWrapper.getReactTagFromWebView(webView);
         UIManagerHelper.getEventDispatcherForReactTag((ReactContext) webView.getContext(), reactTag).dispatchEvent(new TopLoadingFinishEvent(reactTag, createWebViewEvent(webView, url)));
+        if (loadingFinishedListener != null) {
+            loadingFinishedListener.onLoadingFinished();
+        }
     }
 
     protected WritableMap createWebViewEvent(WebView webView, String url) {

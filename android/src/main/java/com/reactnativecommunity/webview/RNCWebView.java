@@ -39,7 +39,7 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Map;
 
-public class RNCWebView extends WebView implements LifecycleEventListener {
+public class RNCWebView extends WebView implements LifecycleEventListener, RNCWebViewClient.OnLoadingFinishedListener {
     protected @Nullable
     String injectedJS;
     protected @Nullable
@@ -214,6 +214,7 @@ public class RNCWebView extends WebView implements LifecycleEventListener {
         if (client instanceof RNCWebViewClient) {
             mRNCWebViewClient = (RNCWebViewClient) client;
             mRNCWebViewClient.setProgressChangedFilter(progressChangedFilter);
+            mRNCWebViewClient.loadingFinishedListener = this;
         }
     }
 
@@ -340,6 +341,10 @@ public class RNCWebView extends WebView implements LifecycleEventListener {
         mCatalystInstance.callFunction(messagingModuleName, method, params);
     }
 
+    public void onLoadingFinished() {
+        onScrollChanged(getScrollX(), getScrollY(), getScrollX(), getScrollY());
+    }
+
     protected void onScrollChanged(int x, int y, int oldX, int oldY) {
         super.onScrollChanged(x, y, oldX, oldY);
 
@@ -376,6 +381,10 @@ public class RNCWebView extends WebView implements LifecycleEventListener {
 
     protected void cleanupCallbacksAndDestroy() {
         setWebViewClient(null);
+        if (mRNCWebViewClient != null) {
+            mRNCWebViewClient.loadingFinishedListener = null;
+            mRNCWebViewClient = null;
+        }
         destroy();
     }
 
